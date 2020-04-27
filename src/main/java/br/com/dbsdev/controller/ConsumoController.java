@@ -19,12 +19,7 @@ import br.com.dbsdev.repositories.VeiculoRepository;
 @RequestMapping(value = "consumo")
 public class ConsumoController {
 
-  VeiculoRepository veiculoRepository;
-  
-  @Autowired
-  public ConsumoController(VeiculoRepository veiculoRepository) {
-    this.veiculoRepository = veiculoRepository;
-  }
+
   
 	@GetMapping(value="/{limiteDias}")
 	public ResponseEntity<Consumo[]> getConsumo(@PathVariable Long limiteDias){
