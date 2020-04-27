@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 
 /**
  * Raiz
@@ -208,6 +209,19 @@ public class Veiculo implements Serializable {
         + mediaConsumoTotal + ", autonomiaTanque=" + autonomiaTanque + ", precoRevendaFipe=" + precoRevendaFipe
         + ", consumo=" + consumo + ", documentacao=" + documentacao + ", outrosCustos=" + outrosCustos + ", manutencao="
         + manutencao + "]";
+  }
+
+  public static Veiculo setVeiculo(Veiculo c, @Valid Veiculo veiculo) {
+    c.setAutonomiaMinima(veiculo.getAutonomiaMinima());
+    c.setAutonomiaTanque(veiculo.getAutonomiaTanque());
+    c.setCapacidadeTanque(veiculo.getCapacidadeTanque());
+    c.setCodigoFipe(veiculo.getCodigoFipe());
+    c.setConsumo(veiculo.getConsumo()); 
+    c.setPlaca(veiculo.getPlaca());
+    c.setMediaConsumoTotal(veiculo.getMediaConsumoTotal());
+    c.setPrecoRevendaFipe(veiculo.getPrecoRevendaFipe());
+    c.setValorCompra(veiculo.getValorCompra()); 
+    return c;
   }
 
 }
