@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
@@ -32,7 +33,7 @@ public class Veiculo implements Serializable {
   private Double autonomiaTanque;
   private Double precoRevendaFipe;
 
-  @OneToMany
+  @OneToMany( mappedBy = "veiculo" )
   private List<Consumo> consumo;
   @OneToMany
   private List<Documentacao> documentacao;

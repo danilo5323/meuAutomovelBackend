@@ -22,37 +22,36 @@ import br.com.dbsdev.repositories.VeiculoRepository;
 public class VeiculoController {
 
   VeiculoRepository veiculoRepository;
-  
+
   @Autowired
   public VeiculoController(VeiculoRepository veiculoRepository) {
     this.veiculoRepository = veiculoRepository;
   }
-  
-  
+
   @GetMapping
-  public ResponseEntity<ArrayList<Veiculo> > consultarVeiculo(){
+  public ResponseEntity<ArrayList<Veiculo>> consultarVeiculo() {
     ArrayList<Veiculo> veiculo = (ArrayList<Veiculo>) veiculoRepository.findAll();
-    return ResponseEntity.ok().body( veiculo );
+    return ResponseEntity.ok().body(veiculo);
   }
-  
+
   @GetMapping(value = "/{id}")
-  public ResponseEntity<Veiculo > consultarVeiculo(@PathVariable Long id){
-    Veiculo veiculo =  ( veiculoRepository.findById(id)).get();
-    return ResponseEntity.ok().body( veiculo );
+  public ResponseEntity<Veiculo> consultarVeiculo(@PathVariable Long id) {
+    Veiculo veiculo = (veiculoRepository.findById(id)).get();
+    return ResponseEntity.ok().body(veiculo);
   }
-  
+
   @PostMapping
-  public ResponseEntity<Veiculo> inserirVeiculo(@Valid @RequestBody   Veiculo veiculo){
+  public ResponseEntity<Veiculo> inserirVeiculo(@Valid @RequestBody Veiculo veiculo) {
     veiculoRepository.save(veiculo);
-    return ResponseEntity.ok().body( veiculo );
+    return ResponseEntity.ok().body(veiculo);
   }
-  
+
   @PutMapping(value = "/{id}")
-  public ResponseEntity<Veiculo> atualizarVeiculo(@Valid @RequestBody Veiculo veiculo, @PathVariable Long id ){
+  public ResponseEntity<Veiculo> atualizarVeiculo(@Valid @RequestBody Veiculo veiculo, @PathVariable Long id) {
     Veiculo c = consultarVeiculo(id).getBody();
-    c = Veiculo.setVeiculo(c, veiculo );
+    c = Veiculo.setVeiculo(c, veiculo);
     veiculoRepository.save(c);
-    return ResponseEntity.ok().body( c );
+    return ResponseEntity.ok().body(c);
   }
-  
+
 }

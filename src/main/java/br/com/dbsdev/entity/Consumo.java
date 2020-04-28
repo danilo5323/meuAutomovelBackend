@@ -7,6 +7,15 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+
+import org.mapstruct.Mapper;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Consumo implements Serializable {
@@ -15,6 +24,7 @@ public class Consumo implements Serializable {
   @Id
   @GeneratedValue
   private Long id;
+  @JsonFormat(pattern = "dd/MM/yyyy")
   private LocalDate dataAbastecimento;
   private BigDecimal precoCombustivel;
   private Double mediaConsumoParcial;
@@ -25,13 +35,19 @@ public class Consumo implements Serializable {
   private BigDecimal custoTotal;
   private String nomePosto;
 
+  @JsonIgnore
+  @ManyToOne
+  @JoinColumn(name="veiculo_id")
+  private Veiculo veiculo;
+  
   public Consumo() {
     super();
   }
+ 
 
   public Consumo(Long id, LocalDate dataAbastecimento, BigDecimal precoCombustivel, Double mediaConsumoParcial,
       Double mediaGeral10Dias, Double mediaConsumo, String tipoCombustivel, Double custoPorKm, BigDecimal custoTotal,
-      String nomePosto) {
+      String nomePosto, Veiculo veiculo) {
     super();
     this.id = id;
     this.dataAbastecimento = dataAbastecimento;
@@ -43,6 +59,16 @@ public class Consumo implements Serializable {
     this.custoPorKm = custoPorKm;
     this.custoTotal = custoTotal;
     this.nomePosto = nomePosto;
+    this.veiculo = veiculo;
+  }
+
+
+  public Veiculo getVeiculo() {
+    return veiculo;
+  }
+
+  public void setVeiculo(Veiculo veiculo) {
+    this.veiculo = veiculo;
   }
 
   public Long getId() {
@@ -130,8 +156,9 @@ public class Consumo implements Serializable {
     return "Consumo [id=" + id + ", dataAbastecimento=" + dataAbastecimento + ", precoCombustivel=" + precoCombustivel
         + ", mediaConsumoParcial=" + mediaConsumoParcial + ", mediaGeral10Dias=" + mediaGeral10Dias + ", mediaConsumo="
         + mediaConsumo + ", tipoCombustivel=" + tipoCombustivel + ", custoPorKm=" + custoPorKm + ", custoTotal="
-        + custoTotal + ", nomePosto=" + nomePosto + "]";
+        + custoTotal + ", nomePosto=" + nomePosto + ", veiculo=" + veiculo + "]";
   }
+
 
   @Override
   public int hashCode() {
