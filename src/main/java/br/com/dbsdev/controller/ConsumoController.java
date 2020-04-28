@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,15 +40,24 @@ public class ConsumoController {
     List<Consumo> consumo =  consumoRepository.findByVeiculo( veiculo );
     return ResponseEntity.ok().body(consumo);
   }
+  
+  @GetMapping(value = "/{placaVeiculo}/{limite}")
+  public ResponseEntity<List<Consumo>> getConsumoLimitado(@PathVariable String placaVeiculo, @PathVariable Integer limite) {
+    Veiculo veiculo = veiculoRepository.findByPlaca(placaVeiculo);
+    List<Consumo> consumo =  consumoRepository.findByVeiculoLimitedToLimit( veiculo, 
+    		PageRequest.of(0, limite) );
+    return ResponseEntity.ok().body(consumo);
+  }
 
   @PostMapping(value = "/{placaVeiculo}")
   public ResponseEntity<Long> inserirNovoConsumo(@PathVariable String placaVeiculo, @Valid @RequestBody Consumo inserir) {
     Long id = 1l;
     Veiculo veiculo = veiculoRepository.findByPlaca(placaVeiculo);
-    List<Consumo> listaConsumo = new ArrayList();
     inserir.setVeiculo(veiculo);
+    
+    List<Consumo> listaConsumo = new ArrayList();
     listaConsumo.add(inserir);
-	veiculo.setConsumo(listaConsumo ); 
+	veiculo.setConsumo( listaConsumo ); 
     consumoRepository.saveAll( listaConsumo);
     return ResponseEntity.ok().body(id);
   }

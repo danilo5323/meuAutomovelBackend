@@ -7,9 +7,10 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Raiz
@@ -34,12 +35,16 @@ public class Veiculo implements Serializable {
   private Double precoRevendaFipe;
 
   @OneToMany( mappedBy = "veiculo" )
+  @JsonIgnore
   private List<Consumo> consumo;
   @OneToMany
+  @JsonIgnore
   private List<Documentacao> documentacao;
   @OneToMany
+  @JsonIgnore
   private List<OutrosCustos> outrosCustos;
   @OneToMany
+  @JsonIgnore
   private List<Manutencao> manutencao;
 
   public Veiculo() {
