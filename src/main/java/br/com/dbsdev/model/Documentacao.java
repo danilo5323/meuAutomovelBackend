@@ -1,4 +1,4 @@
-package br.com.dbsdev.entity;
+package br.com.dbsdev.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;

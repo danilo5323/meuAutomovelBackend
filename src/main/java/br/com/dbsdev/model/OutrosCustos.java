@@ -1,35 +1,32 @@
-package br.com.dbsdev.entity;
+package br.com.dbsdev.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
-public class Manutencao implements Serializable {
+public class OutrosCustos implements Serializable {
 
   private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue
   private Long id;
-  private String custoTotalManutencao;
+  private String descricao;
+  private Double custo;
   private LocalDate data;
 
-  @ManyToMany
-  List<ItemManutencao> itensManutencao;
-
-  public Manutencao() {
+  public OutrosCustos() {
     super();
   }
 
-  public Manutencao(Long id, String custoTotalManutencao, LocalDate data) {
+  public OutrosCustos(Long id, String descricao, Double custo, LocalDate data) {
     super();
     this.id = id;
-    this.custoTotalManutencao = custoTotalManutencao;
+    this.descricao = descricao;
+    this.custo = custo;
     this.data = data;
   }
 
@@ -41,12 +38,20 @@ public class Manutencao implements Serializable {
     this.id = id;
   }
 
-  public String getCustoTotalManutencao() {
-    return custoTotalManutencao;
+  public String getDescricao() {
+    return descricao;
   }
 
-  public void setCustoTotalManutencao(String custoTotalManutencao) {
-    this.custoTotalManutencao = custoTotalManutencao;
+  public void setDescricao(String descricao) {
+    this.descricao = descricao;
+  }
+
+  public Double getCusto() {
+    return custo;
+  }
+
+  public void setCusto(Double custo) {
+    this.custo = custo;
   }
 
   public LocalDate getData() {
@@ -55,20 +60,6 @@ public class Manutencao implements Serializable {
 
   public void setData(LocalDate data) {
     this.data = data;
-  }
-
-  public List<ItemManutencao> getItensManutencao() {
-    return itensManutencao;
-  }
-
-  public void setItensManutencao(List<ItemManutencao> itensManutencao) {
-    this.itensManutencao = itensManutencao;
-  }
-
-  @Override
-  public String toString() {
-    return "Manutencao [id=" + id + ", custoTotalManutencao=" + custoTotalManutencao + ", data=" + data
-        + ", itensManutencao=" + itensManutencao + "]";
   }
 
   @Override
@@ -88,7 +79,7 @@ public class Manutencao implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Manutencao other = (Manutencao) obj;
+    OutrosCustos other = (OutrosCustos) obj;
     if (data == null) {
       if (other.data != null)
         return false;
@@ -100,6 +91,11 @@ public class Manutencao implements Serializable {
     } else if (!id.equals(other.id))
       return false;
     return true;
+  }
+
+  @Override
+  public String toString() {
+    return "OutrosCustos [id=" + id + ", descricao=" + descricao + ", custo=" + custo + ", data=" + data + "]";
   }
 
 }
