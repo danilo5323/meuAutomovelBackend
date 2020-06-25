@@ -3,16 +3,18 @@ package br.com.dbsdev.services;
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.dbsdev.model.Consumo;
 import br.com.dbsdev.repositories.VeiculoRepository;
 
-public class ConsumoVeiculoService {
+@Service
+public class ConsumoService {
 
 	VeiculoRepository veiculoRepository;
 
 	@Autowired
-	public ConsumoVeiculoService(VeiculoRepository veiculoRepository) {
+	public ConsumoService(VeiculoRepository veiculoRepository) {
 		this.veiculoRepository = veiculoRepository;
 	}
 

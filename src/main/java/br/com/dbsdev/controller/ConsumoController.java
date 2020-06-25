@@ -11,16 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.dbsdev.model.Consumo;
-import br.com.dbsdev.services.ConsumoVeiculoService; 
+import br.com.dbsdev.services.ConsumoService; 
 
 @RestController
 @RequestMapping(value = "consumo")
 public class ConsumoController {
  
-	ConsumoVeiculoService serviceConsumo;
+	ConsumoService serviceConsumo;
 
 	@Autowired
-	public ConsumoController(ConsumoVeiculoService consumoVeiculoService) {
+	public ConsumoController(ConsumoService consumoVeiculoService) {
+	  this.serviceConsumo= serviceConsumo;
 	}
 
 	@GetMapping(value = "/{limiteDias}")
