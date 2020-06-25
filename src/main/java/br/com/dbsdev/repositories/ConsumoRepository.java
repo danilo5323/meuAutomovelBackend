@@ -9,8 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.dbsdev.entity.Consumo;
-import br.com.dbsdev.entity.Veiculo;
+import br.com.dbsdev.model.Consumo;
+import br.com.dbsdev.model.Veiculo;
 
 @Repository
 public interface ConsumoRepository extends JpaRepository<Consumo, Long>{
