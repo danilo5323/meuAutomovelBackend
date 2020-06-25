@@ -8,19 +8,19 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.dbsdev.entity.Consumo;
 import br.com.dbsdev.entity.Veiculo;
 import br.com.dbsdev.repositories.ConsumoRepository;
 import br.com.dbsdev.repositories.VeiculoRepository;
 
-@Controller
+@RestController
 @RequestMapping(value = "consumo")
 public class ConsumoController {
 
