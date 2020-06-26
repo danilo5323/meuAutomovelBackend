@@ -17,8 +17,6 @@ import br.com.dbsdev.model.Veiculo;
 public interface ConsumoRepository extends JpaRepository<Consumo, Long>{
 
   List<Consumo> findByVeiculo(Veiculo veiculo);
-  //@Query("SELECT obj FROM Produto obj WHERE obj.nome LIKE %:nome% AND cat IN :categorias")
-	
   
   @Transactional(readOnly=true)
   @Query("SELECT  u FROM Consumo u WHERE u.veiculo=?1")
