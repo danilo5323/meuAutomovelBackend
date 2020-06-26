@@ -18,7 +18,7 @@ import br.com.dbsdev.model.Veiculo;
 import br.com.dbsdev.services.VeiculoService;
 
 @RestController
-@RequestMapping(value = "veiculo")
+@RequestMapping(value = "/veiculo")
 public class VeiculoController {
 
   VeiculoService veiculoService;

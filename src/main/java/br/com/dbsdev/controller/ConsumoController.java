@@ -1,5 +1,7 @@
 package br.com.dbsdev.controller;
- 
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,55 +13,55 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.dbsdev.model.Consumo;
-import br.com.dbsdev.services.ConsumoService; 
+import br.com.dbsdev.services.ConsumoService;
 
 @RestController
-@RequestMapping(value = "consumo")
+@RequestMapping(value = "/consumo")
 public class ConsumoController {
- 
-	ConsumoService serviceConsumo;
 
-	@Autowired
-	public ConsumoController(ConsumoService consumoVeiculoService) {
-	  this.serviceConsumo= serviceConsumo;
-	}
+  ConsumoService serviceConsumo;
 
-	@GetMapping(value = "/{limiteDias}")
-	public ResponseEntity<Consumo[]> getConsumo(@PathVariable Long limiteDias) {
+  @Autowired
+  public ConsumoController(ConsumoService serviceConsumo) {
+    this.serviceConsumo = serviceConsumo;
+  }
 
-		Consumo[] consumo = serviceConsumo.processarConsumo(limiteDias);
+  @GetMapping(value = "/{limiteDias}")
+  public ResponseEntity<List<Consumo>> getConsumo(@PathVariable Long limiteDias) {
 
-		return ResponseEntity.ok().body(consumo);
-	}
+    List<Consumo> consumo = serviceConsumo.processarConsumo(limiteDias);
 
-	@GetMapping
-	public ResponseEntity<Consumo[]> getConsumoTotal() {
+    return ResponseEntity.ok().body(consumo);
+  }
 
-		Consumo[] consumo = serviceConsumo.getConsumoTotal();
+  @GetMapping
+  public ResponseEntity<List<Consumo>> getConsumoTotal() {
 
-		return ResponseEntity.ok().body(consumo);
-	}
+    List<Consumo> consumo = serviceConsumo.getConsumoTotal();
 
-	@PostMapping
-	public ResponseEntity<Long> inserirNovoConsumo(Consumo inserir) {
-		Long id = 1l;
+    return ResponseEntity.ok().body(consumo);
+  }
 
-		return ResponseEntity.ok().body(id);
-	}
+  @PostMapping
+  public ResponseEntity<Long> inserirNovoConsumo(Consumo inserir) {
+    Long id = 1l;
 
-	@PutMapping
-	public ResponseEntity<Consumo> atualizarConsumo(Consumo parametro) {
+    return ResponseEntity.ok().body(id);
+  }
 
-	  Consumo mensagem = serviceConsumo.atualizarConsumo(parametro);
+  @PutMapping
+  public ResponseEntity<Consumo> atualizarConsumo(Consumo parametro) {
 
-		return ResponseEntity.ok().body(mensagem);
-	}
+    Consumo mensagem = serviceConsumo.atualizarConsumo(parametro);
 
-	@DeleteMapping
-	public ResponseEntity<Consumo> deletarConsumo(Long id) {
+    return ResponseEntity.ok().body(mensagem);
+  }
 
-		Consumo response = serviceConsumo.deletar(id);
+  @DeleteMapping
+  public ResponseEntity<Consumo> deletarConsumo(Long id) {
 
-		return ResponseEntity.ok().body(response);
-	}
+    Consumo response = serviceConsumo.deletar(id);
+
+    return ResponseEntity.ok().body(response);
+  }
 }

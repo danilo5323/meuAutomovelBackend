@@ -1,56 +1,47 @@
 package br.com.dbsdev.services;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.dbsdev.model.Consumo;
-import br.com.dbsdev.repositories.VeiculoRepository;
+import br.com.dbsdev.repositories.ConsumoRepository;
 
 @Service
 public class ConsumoService {
 
-	VeiculoRepository veiculoRepository;
+  ConsumoRepository consumoRepository;
 
-	@Autowired
-	public ConsumoService(VeiculoRepository veiculoRepository) {
-		this.veiculoRepository = veiculoRepository;
-	}
+  @Autowired
+  public ConsumoService(ConsumoRepository consumoRepository) {
+    this.consumoRepository = consumoRepository;
+  }
 
-	public Consumo[] processarConsumo(Long limiteDias) {
+  public List<Consumo> processarConsumo(Long limiteDias) {
 
-		System.out.println(""+ limiteDias);
-		
-		Consumo[] consumo = new Consumo[3] ;
-		
-		consumo[0] = new Consumo();
-		consumo[0].setCustoPorKm(54.6);
-		consumo[0].setPrecoCombustivel(new BigDecimal(45.4));
+    LocalDate diaFinal = LocalDate.now();
+    LocalDate diaInicial = diaFinal.minusDays(limiteDias);
+    List<Consumo> consumo = consumoRepository.findRetroativoDias(diaInicial, diaFinal);
+    return consumo;
+  }
 
-		consumo[1] = new Consumo();
-		consumo[1].setCustoPorKm(54.6);
-		consumo[1].setPrecoCombustivel(new BigDecimal(45.4));
-		
-		return consumo;
-	}
+  public List<Consumo> getConsumoTotal() {
+    List<Consumo> consumo = consumoRepository.findAll();
+    return consumo;
+  }
 
-	public Consumo[] getConsumoTotal() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+  public Consumo atualizarConsumo(Consumo parametro) {
+    return new Consumo();
+  }
 
-	public Consumo atualizarConsumo(Consumo parametro) {
-		return new Consumo( );
-	}
+  public Consumo deletar(Long id) {
 
-	public Consumo deletar(Long id) {
+    Consumo consumoDeletado = new Consumo();
 
-		Consumo consumoDeletado = new Consumo();
-		
-		
-		
-		return consumoDeletado;
-	}
+    return consumoDeletado;
+  }
 
 }

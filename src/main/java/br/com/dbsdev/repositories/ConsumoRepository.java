@@ -1,5 +1,6 @@
 package br.com.dbsdev.repositories;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
@@ -22,5 +23,9 @@ public interface ConsumoRepository extends JpaRepository<Consumo, Long>{
   @Transactional(readOnly=true)
   @Query("SELECT  u FROM Consumo u WHERE u.veiculo=?1")
   List<Consumo> findByVeiculoLimitedToLimit(@Param("veiculo")  Veiculo veiculo, Pageable limit);
+
+  @Transactional(readOnly=true)
+  @Query("SELECT  u FROM Consumo u WHERE u.dataAbastecimento > ?1 and u.dataAbastecimento < ?2")
+  List<Consumo> findRetroativoDias(@Param("diaAtual") LocalDate dia1, @Param("diaAnterior") LocalDate dia2);
 
 }
